@@ -1,0 +1,11 @@
+{
+    "name": "EventManagement",
+    "alias": "eventmanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Duobix\\EventManagement\\Providers\\EventManagementServiceProvider"
+    ],
+    "files": []
+}

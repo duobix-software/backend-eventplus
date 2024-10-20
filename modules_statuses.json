@@ -1,0 +1,11 @@
+{
+    "Admin": true,
+    "Client": true,
+    "Organizer": true,
+    "EventManagement": true,
+    "Customer": true,
+    "Payment": true,
+    "Category": true,
+    "Organisation": true,
+    "User": true
+}

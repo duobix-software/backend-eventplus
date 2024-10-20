@@ -1,0 +1,11 @@
+{
+    "name": "Organisation",
+    "alias": "organisation",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Duobix\\Organisation\\Providers\\OrganisationServiceProvider"
+    ],
+    "files": []
+}

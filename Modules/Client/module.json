@@ -1,0 +1,11 @@
+{
+    "name": "Client",
+    "alias": "client",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Duobix\\Client\\Providers\\ClientServiceProvider"
+    ],
+    "files": []
+}

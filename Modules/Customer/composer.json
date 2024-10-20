@@ -1,0 +1,30 @@
+{
+    "name": "duobix/customer",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Customer\\": "app/",
+            "Duobix\\Customer\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Customer\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Customer\\Tests\\": "tests/"
+        }
+    }
+}

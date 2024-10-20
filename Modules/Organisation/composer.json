@@ -1,0 +1,30 @@
+{
+    "name": "duobix/organisation",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Organisation\\": "app/",
+            "Duobix\\Organisation\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Organisation\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Organisation\\Tests\\": "tests/"
+        }
+    }
+}

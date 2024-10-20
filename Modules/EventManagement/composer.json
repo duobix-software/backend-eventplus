@@ -1,0 +1,30 @@
+{
+    "name": "duobix/eventmanagement",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\EventManagement\\": "app/",
+            "Duobix\\EventManagement\\Database\\Factories\\": "database/factories/",
+            "Duobix\\EventManagement\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\EventManagement\\Tests\\": "tests/"
+        }
+    }
+}

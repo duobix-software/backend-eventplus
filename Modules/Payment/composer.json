@@ -1,0 +1,30 @@
+{
+    "name": "duobix/payment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Payment\\": "app/",
+            "Duobix\\Payment\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Payment\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Payment\\Tests\\": "tests/"
+        }
+    }
+}
