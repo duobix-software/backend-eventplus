@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Duobix\\Customer\\": "src/",
+            "Duobix\\Customer\\": "app/",
             "Duobix\\Customer\\Database\\Factories\\": "database/factories/",
             "Duobix\\Customer\\Database\\Seeders\\": "database/seeders/"
         }
