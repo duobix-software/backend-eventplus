@@ -1,17 +1,17 @@
 <?php
 
-namespace Duobix\Category\Providers;
+namespace Duobix\Organisation\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 
-class CategoryServiceProvider extends ServiceProvider
+class OrganisationServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
-    protected string $name = 'Category';
+    protected string $name = 'Organisation';
 
-    protected string $nameLower = 'category';
+    protected string $nameLower = 'organisation';
 
     /**
      * Boot the application events.
