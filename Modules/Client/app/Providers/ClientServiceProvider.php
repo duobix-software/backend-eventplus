@@ -2,6 +2,8 @@
 
 namespace Duobix\Client\Providers;
 
+use Duobix\Client\Http\Middleware\AuthenticateCustomer;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
@@ -17,7 +19,7 @@ class ClientServiceProvider extends ServiceProvider
     /**
      * Boot the application events.
      */
-    public function boot(): void
+    public function boot(Router $router): void
     {
         $this->registerCommands();
         $this->registerCommandSchedules();
@@ -25,6 +27,8 @@ class ClientServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        $router->aliasMiddleware('customer', AuthenticateCustomer::class);
     }
 
     /**

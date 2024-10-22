@@ -1,19 +1,27 @@
 <?php
 
+use Duobix\Client\Http\Controllers\Api\CategoryController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Duobix\Client\Http\Controllers\ClientController;
 
-/*
- *--------------------------------------------------------------------------
- * API Routes
- *--------------------------------------------------------------------------
- *
- * Here is where you can register API routes for your application. These
- * routes are loaded by the RouteServiceProvider within a group which
- * is assigned the "api" middleware group. Enjoy building your API!
- *
-*/
+Route::get('/customer', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('client', ClientController::class)->names('client');
+
+Route::prefix('v1')->group(function () {
+    require __DIR__ . '/api/auth_routes.php';
+
+    // categories.
+    // tags.
+    // events.
+    
+
+    Route::get('/categories', [CategoryController::class, 'categories'])->name('category');
+    Route::get('/categories/{category}/tags', [CategoryController::class, 'tags'])->name('category.tags');
+
+    // Route::get('/organisations')->name('organisations')
+
+    // Route::get('/events')->name('events');
+
 });

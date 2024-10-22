@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Duobix\Client\Http\Controllers\ClientController;
+use Duobix\Client\Http\Controllers\CompanyRegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use Duobix\Client\Http\Controllers\ClientController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('client', ClientController::class)->names('client');
+
+Route::prefix('join-us')->controller(CompanyRegistrationController::class)->as('join-us.')->group(function () {
+    Route::get('/join-us', 'create')->name('create');
+    Route::post('join-us', 'store')->name('store');
 });
