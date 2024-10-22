@@ -17,9 +17,9 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->string('image')->nullable();
-            $table->string('phone');
+            $table->string('phone')->unique()->index();
             $table->string('email')->unique()->index();
-            $table->string('username')->unique()->index();
+            $table->string('username')->nullable()->unique()->index();
             $table->string('password');
             $table->boolean('status')->default(true);
             $table->rememberToken();
