@@ -1,11 +1,16 @@
 {
     "Admin": true,
     "Client": true,
-    "Organizer": true,
-    "EventManagement": true,
     "Customer": true,
     "Payment": true,
     "Category": true,
     "Organisation": true,
-    "User": true
+    "User": true,
+    "Core": true,
+    "Company": true,
+    "Organizer": true,
+    "Installer": true,
+    "Event": true,
+    "Ticket": true,
+    "Tag": true
 }

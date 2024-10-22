@@ -1,11 +1,13 @@
 /.phpunit.cache
 /node_modules
 /public/build
-/public/hot
+/public/*hot
 /public/storage
+/public/vendor/telescope
 /storage/*.key
 /storage/pail
 /vendor
+package-lock.json
 .env
 .env.backup
 .env.production
