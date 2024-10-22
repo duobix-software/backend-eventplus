@@ -2,6 +2,7 @@
 
 namespace Duobix\Organisation\Models;
 
+use Duobix\Category\Models\Category;
 use Duobix\Event\Models\Event;
 use Duobix\Organizer\Models\Organizer;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,7 @@ use Duobix\Core\Models\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Duobix\Organisation\Database\Factories\OrganisationFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Organisation extends Model
@@ -22,7 +24,9 @@ class Organisation extends Model
      */
     protected $fillable = [
         'slug',
-        'name', 'slogan', 'description',
+        'name',
+        'slogan',
+        'description',
         'status',
         'logo',
         'website',
@@ -48,5 +52,10 @@ class Organisation extends Model
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }
