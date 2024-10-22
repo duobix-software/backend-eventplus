@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'guard' => 'customer',
+        'passwords' => 'customers',
     ],
 
     /*
@@ -36,10 +36,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'customer' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'customers',
         ],
+
+        'organizer' => [
+            'driver' => 'session',
+            'provider' => 'organizers',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins'
+        ]
     ],
 
     /*
@@ -60,15 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'customers' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => Duobix\Customer\Models\Customer::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'organizers' => [
+            'driver' => 'eloquent',
+            'model' => Duobix\Organizer\Models\Organizer::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Duobix\User\Models\Admin::class,
+        ]
     ],
 
     /*
@@ -91,12 +106,26 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+        'customers' => [
+            'provider' => 'customers',
+            'table' => 'customer_password_resets',
             'expire' => 60,
-            'throttle' => 60,
+            'throttle' => 60
         ],
+
+        'organisers' => [
+            'provider' => 'organizers',
+            'table' => 'organizer_password_resets',
+            'expire' => 60,
+            'throttle' => 60
+        ],
+
+        'admins' => [
+            'provider' => 'admin',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+            'throttle' => 60
+        ]
     ],
 
     /*
