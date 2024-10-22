@@ -1,0 +1,30 @@
+{
+    "name": "duobix/installer",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Installer\\": "app/",
+            "Duobix\\Installer\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Installer\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Installer\\Tests\\": "tests/"
+        }
+    }
+}

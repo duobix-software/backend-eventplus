@@ -1,0 +1,11 @@
+{
+    "name": "Installer",
+    "alias": "installer",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Duobix\\Installer\\Providers\\InstallerServiceProvider"
+    ],
+    "files": []
+}
