@@ -23,6 +23,15 @@ class EventDate extends Model
 
     public $timestamps = false;
 
+    protected function casts()
+    {
+        return [
+            'is_datetime' => 'boolean',
+            'start_date' => 'datetime',
+            'end_date' => 'datetime',
+        ];
+    }
+
     // protected static function newFactory(): EventFactory
     // {
     //     // return EventFactory::new();

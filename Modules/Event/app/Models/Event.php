@@ -23,12 +23,20 @@ class Event extends Model
         'slug',
         'title',
         'description',
+        'status', // active, completed, canceled
         'banner',
         'organisation_id',
         'category_id',
-        'status',
         'max_participants',
     ];
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['eventDates', 'eventPricings', 'addresses'];
+
 
     // protected static function newFactory(): EventFactory
     // {
