@@ -13,12 +13,12 @@ class CategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
             'logo' => $this->logo,
             'banner' => $this->banner,
+            'url' => $this->when($request->routeIs('api.category'), route('api.category.tags', $this->slug)),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }

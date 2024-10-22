@@ -18,8 +18,8 @@ class CategoryController extends Controller
         return CategoryResource::collection($this->categoryRepository->all());
     }
 
-    public function tags(Request $request)
+    public function tags($category)
     {
-        return new CategoryResource($this->categoryRepository->with('tags')->find($request->route('category')));
+        return new CategoryResource($this->categoryRepository->with('tags')->findByField('slug', $category)->first());
     }
 }
