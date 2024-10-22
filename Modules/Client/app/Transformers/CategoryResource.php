@@ -18,7 +18,8 @@ class CategoryResource extends JsonResource
             'description' => $this->description,
             'logo' => $this->logo,
             'banner' => $this->banner,
-            'url' => $this->when($request->routeIs('api.category'), route('api.category.tags', $this->slug)),
+            'tag_url' => $this->when($request->routeIs('api.category'), route('api.category.tags', $this->slug)),
+            'event_url' => route('api.event.index', ['category' => $this->slug]),
             'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }

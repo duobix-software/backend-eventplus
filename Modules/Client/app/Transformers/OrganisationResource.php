@@ -13,14 +13,13 @@ class OrganisationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
             'logo' => $this->logo,
             'slogan' => $this->sloagan,
             'description' => $this->description,
             'website' => $this->website,
-            'url' => route('api.organisation.show', $this->slug),
+            'organisation_url' => $this->when($request->routeIs('api.organisation.index'), route('api.organisation.show', $this->slug)),
             'category' => $this->whenLoaded('category', fn () => new CategoryResource($this->category)),
             'events' => EventResource::collection($this->whenLoaded('events')),
         ];
