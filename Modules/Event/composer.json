@@ -1,0 +1,30 @@
+{
+    "name": "duobix/event",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Event\\": "app/",
+            "Duobix\\Event\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Event\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Event\\Tests\\": "tests/"
+        }
+    }
+}
