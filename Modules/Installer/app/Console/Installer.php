@@ -14,13 +14,13 @@ class Installer extends Command
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'eticket:install
+    protected $signature = 'eventplus:install
         { --skip-admin-creation : Skip admin creation. }';
 
     /**
      * The console command description.
      */
-    protected $description = 'Duobix E-ticket installer.';
+    protected $description = 'Duobix Event Plus installer.';
 
     /**
      * Create a new command instance.
