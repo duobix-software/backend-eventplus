@@ -1,17 +1,17 @@
 <?php
 
-namespace Duobix\Organizer\Providers;
+namespace Duobix\Tag\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 
-class OrganizerServiceProvider extends ServiceProvider
+class TagServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
-    protected string $name = 'Organizer';
+    protected string $name = 'Tag';
 
-    protected string $nameLower = 'organizer';
+    protected string $nameLower = 'tag';
 
     /**
      * Boot the application events.
@@ -30,7 +30,6 @@ class OrganizerServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(EventServiceProvider::class);
     }
 
     /**
@@ -83,17 +82,5 @@ class OrganizerServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->nameLower)) {
-                $paths[] = $path.'/modules/'.$this->nameLower;
-            }
-        }
-
-        return $paths;
     }
 }

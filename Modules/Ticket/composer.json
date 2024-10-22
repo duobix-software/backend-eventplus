@@ -1,5 +1,5 @@
 {
-    "name": "duobix/organisation",
+    "name": "duobix/ticket",
     "description": "",
     "authors": [
         {
@@ -17,14 +17,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Duobix\\Organisation\\": "app/",
-            "Duobix\\Organisation\\Database\\Factories\\": "database/factories/",
-            "Duobix\\Organisation\\Database\\Seeders\\": "database/seeders/"
+            "Duobix\\Ticket\\": "app/",
+            "Duobix\\Ticket\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Ticket\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Duobix\\Organisation\\Tests\\": "tests/"
+            "Duobix\\Ticket\\Tests\\": "tests/"
         }
     }
 }

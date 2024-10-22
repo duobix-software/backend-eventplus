@@ -1,5 +1,5 @@
 {
-    "name": "duobix/organisation",
+    "name": "duobix/tag",
     "description": "",
     "authors": [
         {
@@ -17,14 +17,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Duobix\\Organisation\\": "app/",
-            "Duobix\\Organisation\\Database\\Factories\\": "database/factories/",
-            "Duobix\\Organisation\\Database\\Seeders\\": "database/seeders/"
+            "Duobix\\Tag\\": "app/",
+            "Duobix\\Tag\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Tag\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Duobix\\Organisation\\Tests\\": "tests/"
+            "Duobix\\Tag\\Tests\\": "tests/"
         }
     }
 }

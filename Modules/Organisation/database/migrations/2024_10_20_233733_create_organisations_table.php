@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('organisations', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('country');
-            $table->string('state');
-            $table->string('postcode');
-            $table->string('city');
-            $table->string('address');
-
-            $table->boolean('status')->default(true);
-            $table->string('logo')->nullable();
+            $table->string('slug')->index()->unique();
+            $table->string('name');
+            $table->string('slogan');
+            $table->text('description')->nullable();
             $table->string('website')->nullable();
+            $table->string('logo')->nullable();
+            $table->boolean('status')->default(true);
             $table->boolean('is_suspended')->default(false);
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
