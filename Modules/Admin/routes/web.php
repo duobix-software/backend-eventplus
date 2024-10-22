@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Duobix\Admin\Http\Controllers\AdminController;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,11 @@ use Duobix\Admin\Http\Controllers\AdminController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('admin', AdminController::class)->names('admin');
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('welcome', []);
+    });
+
+
+    require __DIR__ . '/organisation_routes.php';
 });

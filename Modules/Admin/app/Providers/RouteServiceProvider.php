@@ -3,6 +3,7 @@
 namespace Duobix\Admin\Providers;
 
 use Illuminate\Support\Facades\Route;
+use Duobix\Admin\Http\Middleware\HandleAdminRequests;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -35,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path($this->name, '/routes/web.php'));
+        Route::middleware(['web', HandleAdminRequests::class])->group(module_path($this->name, '/routes/web.php'));
     }
 
     /**
