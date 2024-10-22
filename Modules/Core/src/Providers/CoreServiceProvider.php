@@ -2,8 +2,12 @@
 
 namespace Duobix\Core\Providers;
 
+use Duobix\Core\Core;
+use Duobix\Core\Rules\WordCount;
+use Duobix\Core\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use Nwidart\Modules\Traits\PathNamespace;
 
 class CoreServiceProvider extends ServiceProvider
@@ -24,6 +28,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        // $this->registerValidationRules();
     }
 
     /**
@@ -31,7 +36,11 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(EventServiceProvider::class);
+        // $this->app->singleton('core', function () {
+        //     return app()->make(Core::class);
+        // });
+
+        // $this->app->register(EventServiceProvider::class);
     }
 
     /**
@@ -77,6 +86,29 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([module_path($this->name, 'config/config.php') => config_path($this->nameLower.'.php')], 'config');
         $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), $this->nameLower);
     }
+
+    // protected function registerValidationRules(): void
+    // {
+    //     Validator::extend('phone', PhoneNumber::class);
+
+    //     Validator::extend('min_words', function ($attribute, $value, $parameters, $validator) {
+    //         $min = $parameters[0] ?? 0; // Default to 0 if no parameter is provided
+    //         return new WordCount($min, PHP_INT_MAX); // No upper limit
+
+    //         return $wordCountRule->validate($attribute, $value, function ($message) use ($validator, $attribute) {
+    //             $validator->errors()->add($attribute, $message);
+    //         });
+    //     });
+
+    //     Validator::extend('max_words', function ($attribute, $value, $parameters, $validator) {
+    //         $max = $parameters[0] ?? PHP_INT_MAX; // Default to no limit if no parameter is provided
+    //         return new WordCount(0, $max); // No lower limit
+            
+    //         return $wordCountRule->validate($attribute, $value, function ($message) use ($validator, $attribute) {
+    //             $validator->errors()->add($attribute, $message);
+    //         });
+    //     });
+    // }
 
     /**
      * Get the services provided by the provider.
