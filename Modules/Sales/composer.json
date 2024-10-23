@@ -1,0 +1,30 @@
+{
+    "name": "duobix/sales",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdennour Tadjer",
+            "email": "abdennour.tadjer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Duobix\\Sales\\": "app/",
+            "Duobix\\Sales\\Database\\Factories\\": "database/factories/",
+            "Duobix\\Sales\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Duobix\\Sales\\Tests\\": "tests/"
+        }
+    }
+}
