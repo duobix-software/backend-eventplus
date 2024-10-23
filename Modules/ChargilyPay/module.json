@@ -1,0 +1,11 @@
+{
+    "name": "ChargilyPay",
+    "alias": "chargilypay",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Duobix\\ChargilyPay\\Providers\\ChargilyPayServiceProvider"
+    ],
+    "files": []
+}
