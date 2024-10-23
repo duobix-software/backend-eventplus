@@ -14,11 +14,11 @@
     <meta name="author" content="{{ $author ?? '' }}">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
+    {{-- <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
 
     {{-- Vite CSS --}}
-    {{-- {{ module_vite('build-client', 'resources/assets/sass/app.scss') }} --}}
+    {{ module_vite('build/client', 'resources/assets/css/app.css') }}
 </head>
 
 <body>
