@@ -4,16 +4,15 @@ namespace Duobix\Company\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class AuthenticateSessionController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Auth::guard('organizer')->login($user);
+        return view('company::index');
     }
 
     /**
