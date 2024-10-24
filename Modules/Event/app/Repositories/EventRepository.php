@@ -3,6 +3,7 @@
 namespace Duobix\Event\Repositories;
 
 use Duobix\Core\Eloquent\Repository;
+use Duobix\Event\Jobs\IndexEvent;
 
 class EventRepository extends Repository
 {
@@ -29,4 +30,24 @@ class EventRepository extends Repository
 
         return $query->cursorPaginate($params['limit'] ?? 15);
     }
+
+    public function create(array $attributes)
+    {
+        $model = $this->model->create($attributes);
+
+        if ($model->status === "active") {
+            IndexEvent::dispatchAfterResponse($model);
+        }
+
+        return $model;
+    }
+
+    public function findBySlug(string $slug, bool $active = true)
+    {
+        return $this->findWhere([
+            'slug' => $slug,
+            'status' => $active,
+        ])->first();
+    }
+
 }

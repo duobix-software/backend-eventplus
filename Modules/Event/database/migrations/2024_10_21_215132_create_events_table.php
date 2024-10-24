@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organisation_id')->constrained()->cascadeOnDelete();
-            $table->string('status');
+            $table->boolean('status');
             $table->string('slug');
             $table->string('title');
             $table->text('description');

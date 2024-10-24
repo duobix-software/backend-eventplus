@@ -2,22 +2,65 @@
 
 namespace Duobix\Client\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Duobix\Event\Repositories\EventRepository;
+use Duobix\Sales\Enums\OrderStatus;
+use Duobix\Sales\Repositories\OrderRepository;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CheckoutController extends Controller
+class CheckoutController extends Controller implements HasMiddleware
 {
-    /**
-     * Handle the incoming request.
-     */
+    public function __construct(
+        protected EventRepository $eventRepository,
+        protected OrderRepository $orderRepository,
+    ) {}
+
+    public static function middleware()
+    {
+        return ['auth:sanctum'];
+    }
+
     public function __invoke(Request $request)
     {
+        $request->validate([
+            'event' => ['required', 'string'],
+            'pricing' => ['nullable'],
+            'date' => ['nullable'],
+        ]);
 
+        $customer = $request->user();
 
-        
+        /** @var \Duobix\Event\Models\Event */
+        $event = $this->eventRepository->findByField('slug', $request->input('event'))->first();
 
+        $pricing = $event->eventPricings->first();
+        if ($request->input('pricing')) {
+            $pricing = $event->eventPricings->where('id', $request->input('pricing'));
+        }
 
+        $date = $event->eventDates->first();
+        if ($request->input('date')) {
+            $date = $event->eventDates->where('id', $request->input('date'));
+        }
 
+        $order = DB::transaction(function () use ($event, $customer, $pricing, $date) {
+            return $this->orderRepository->create([
+                'organisation_id' => $event->organisation_id,
+                'event_id' => $event->id,
+                'customer_id' => $customer->id,
+                'event_pricing_id' => $pricing->id,
+                'event_date_id' => $date->id,
+                'total' => $pricing->price,
+                'status' => OrderStatus::Pending
+            ]);
+        });
+
+        return response()->json([
+            'redirect' => true,
+            'redirect_url' => route('api.chargilypay.redirect', ['order' => $order->id]),
+        ], 201);
     }
 }
 

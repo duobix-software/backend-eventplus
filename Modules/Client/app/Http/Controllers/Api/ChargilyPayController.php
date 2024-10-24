@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Duobix\ChargilyPay\Repositories\ChargilyPayRepository;
+use Duobix\Sales\Repositories\OrderRepository;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -20,41 +21,46 @@ class ChargilyPayController extends Controller implements HasMiddleware
 
 
     public function __construct(
-        protected ChargilyPayRepository $chargilyPayRepository
+        protected ChargilyPayRepository $chargilyPayRepository,
+        protected OrderRepository $orderRepository,
     ) {}
 
     public function redirect(Request $request)
     {
-        // $request->validate([]);
+        $request->validate([
+            'order' => ['required', 'exists:orders,id'],
+        ]);
 
         $checkout = DB::transaction(function () use ($request) {
+            $order = $this->orderRepository->find($request->input('order'));
+
             $payment =  $this->chargilyPayRepository->create([
                 'user_id' => $request->user()->id,
                 'status' => 'pending',
                 'currency' => 'dzd',
-                'amount' => '1000',
+                'amount' => $order->total,
             ]);
 
-            $checkout = $this->chargilyPayInstance()->checkouts();
-
-            $checkout = $checkout->create([
+            $checkout = $this->chargilyPayInstance()->checkouts()->create([
                 'metadata' => [
                     'payment_id' => $payment->id,
                 ],
-                'locale' => 'fr',
+                'locale' => 'en',
                 'amount' => $payment->amount,
                 'currency' => $payment->currency,
                 'description' => "Payment ID={$payment->id}",
                 "success_url" => route('api.chargilypay.back'),
                 "failure_url" => route('api.chargilypay.back'),
                 "webhook_endpoint" => route('api.chargilypay.webhook'),
-
             ]);
 
             return $checkout;
         });
 
-        return redirect($checkout->getUrl());
+        return response()->json([
+            'redirect' => true,
+            'redirect_url' => $checkout->getUrl(),
+        ]);
     }
 
     public function back(Request $request)
