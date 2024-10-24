@@ -12,15 +12,8 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-client',
             input: [
-                __dirname + '/resources/assets/sass/app.scss',
-                __dirname + '/resources/assets/js/app.js'
             ],
             refresh: true,
         }),
     ],
 });
-
-//export const paths = [
-//    'Modules/Client/resources/assets/sass/app.scss',
-//    'Modules/Client/resources/assets/js/app.js',
-//];
