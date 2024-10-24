@@ -17,9 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Duobix\\Installer\\": "app/",
-            "Duobix\\Installer\\Database\\Factories\\": "database/factories/",
-            "Duobix\\Installer\\Database\\Seeders\\": "database/seeders/"
+            "Duobix\\Installer\\": "src/"
         }
     },
     "autoload-dev": {

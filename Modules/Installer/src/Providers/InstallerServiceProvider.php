@@ -66,8 +66,8 @@ class InstallerServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, $this->nameLower);
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(module_path($this->name, 'lang'), $this->nameLower);
-            $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
+            $this->loadTranslationsFrom(module_path($this->name, 'src/lang'), $this->nameLower);
+            $this->loadJsonTranslationsFrom(module_path($this->name, 'src/lang'));
         }
     }
 
@@ -76,8 +76,8 @@ class InstallerServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->publishes([module_path($this->name, 'config/config.php') => config_path($this->nameLower . '.php')], 'config');
-        $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), $this->nameLower);
+        $this->publishes([module_path($this->name, 'src/config/config.php') => config_path($this->nameLower . '.php')], 'config');
+        $this->mergeConfigFrom(module_path($this->name, 'src/config/config.php'), $this->nameLower);
     }
 
     /**
