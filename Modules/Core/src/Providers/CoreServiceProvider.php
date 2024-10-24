@@ -2,12 +2,7 @@
 
 namespace Duobix\Core\Providers;
 
-use Duobix\Core\Core;
-use Duobix\Core\Rules\WordCount;
-use Duobix\Core\Rules\PhoneNumber;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Validator;
 use Nwidart\Modules\Traits\PathNamespace;
 
 class CoreServiceProvider extends ServiceProvider
@@ -27,7 +22,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
-        $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        $this->loadMigrationsFrom(module_path($this->name, 'src/database/migrations'));
         // $this->registerValidationRules();
     }
 
@@ -73,8 +68,8 @@ class CoreServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, $this->nameLower);
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(module_path($this->name, 'lang'), $this->nameLower);
-            $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
+            $this->loadTranslationsFrom(module_path($this->name, 'src/lang'), $this->nameLower);
+            $this->loadJsonTranslationsFrom(module_path($this->name, 'src/lang'));
         }
     }
 
@@ -83,8 +78,8 @@ class CoreServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->publishes([module_path($this->name, 'config/config.php') => config_path($this->nameLower.'.php')], 'config');
-        $this->mergeConfigFrom(module_path($this->name, 'config/config.php'), $this->nameLower);
+        $this->publishes([module_path($this->name, 'src/config/config.php') => config_path($this->nameLower.'.php')], 'config');
+        $this->mergeConfigFrom(module_path($this->name, 'src/config/config.php'), $this->nameLower);
     }
 
     // protected function registerValidationRules(): void
@@ -116,17 +111,5 @@ class CoreServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->nameLower)) {
-                $paths[] = $path.'/modules/'.$this->nameLower;
-            }
-        }
-
-        return $paths;
     }
 }
