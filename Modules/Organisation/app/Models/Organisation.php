@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Duobix\Organisation\Database\Factories\OrganisationFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Organisation extends Model
 {
@@ -39,7 +40,7 @@ class Organisation extends Model
         return OrganisationFactory::new();
     }
 
-    public function addresses()
+    public function addresses(): MorphMany
     {
         return $this->morphMany(Address::class, 'addressable');
     }
