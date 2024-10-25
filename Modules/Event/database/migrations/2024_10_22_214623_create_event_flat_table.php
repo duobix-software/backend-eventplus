@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('event_flat', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('event_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('organisation_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('organisation_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('event_id')->constrained()->cascadeOnDelete();
-            $table->string('slug')->unique();
-            $table->string('title');
-            $table->string('description');
-            $table->string('banner');
-            $table->string('max_participants');
-            $table->json('dates');
-            $table->json('pricings');
+            $table->string('status')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('banner')->nullable();
+            $table->string('max_participants')->nullable();
+            $table->json('organisation')->nullable();
+            $table->json('dates')->nullable();
+            $table->json('pricings')->nullable();
+            $table->json('addresses')->nullable();
+            $table->json('tags')->nullable();
+            $table->json('category')->nullable();
         });
     }
 

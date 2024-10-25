@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organisation_id')->constrained()->cascadeOnDelete();
-            $table->boolean('status');
             $table->string('slug');
             $table->string('title');
             $table->text('description');
             $table->string('banner');
             $table->integer('max_participants');
+            $table->string('status');
             $table->timestamps();
         });
     }
