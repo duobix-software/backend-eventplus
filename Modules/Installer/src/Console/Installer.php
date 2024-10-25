@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Duobix\Installer\Database\Seeders\DatabaseSeeder as ETicketDatabaseSeeder;
-use Illuminate\Support\Facades\Storage;
 
 class Installer extends Command
 {
@@ -42,7 +41,7 @@ class Installer extends Command
         $this->warn('Step: Seeding basic data for E-ticket kickstart...');
         $this->info(app(ETicketDatabaseSeeder::class)->run([]));
 
-        $this->warn('Step: Indexing events');
+        $this->warn('Step: Indexing events...');
         $this->call('indexer:index');
 
         $this->warn('Step: Linking storage directory...');
