@@ -5,8 +5,6 @@ namespace Duobix\Installer\Database\Seeders\Core;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-use function Laravel\Prompts\table;
-
 class StatesTableSeeder extends Seeder
 {
     /**
@@ -16,7 +14,7 @@ class StatesTableSeeder extends Seeder
     {
         DB::table('country_states')->delete();
 
-        $states = json_decode(file_get_contents(module_path('Installer', 'app/Data/states.json')), true);
+        $states = json_decode(file_get_contents(module_path('Installer', 'src/Data/states.json')), true);
 
         DB::table('country_states')->insert($states);
     }

@@ -14,7 +14,7 @@ class CountriesTableSeeder extends Seeder
     {
         DB::table('countries')->delete();
 
-        $countries = json_decode(file_get_contents(module_path('Installer', 'app/Data/countries.json')), true);
+        $countries = json_decode(file_get_contents(module_path('Installer', 'src/Data/countries.json')), true);
 
         DB::table('countries')->insert($countries);
     }
