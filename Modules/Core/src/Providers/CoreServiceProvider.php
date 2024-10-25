@@ -22,7 +22,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
-        $this->loadMigrationsFrom(module_path($this->name, 'src/database/migrations'));
+        $this->loadMigrationsFrom(module_path($this->name, 'src/Database/Migrations'));
         // $this->registerValidationRules();
     }
 
@@ -31,11 +31,6 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // $this->app->singleton('core', function () {
-        //     return app()->make(Core::class);
-        // });
-
-        // $this->app->register(EventServiceProvider::class);
     }
 
     /**

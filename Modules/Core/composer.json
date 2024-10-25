@@ -20,9 +20,7 @@
             "src/helpers.php"
         ],
         "psr-4": {
-            "Duobix\\Core\\": "src/",
-            "Duobix\\Core\\Database\\Factories\\": "database/factories/",
-            "Duobix\\Core\\Database\\Seeders\\": "database/seeders/"
+            "Duobix\\Core\\": "src/"
         }
     },
     "autoload-dev": {
