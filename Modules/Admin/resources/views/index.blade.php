@@ -1,1 +1,0 @@
-<h1>this is the end of the event</h1>
