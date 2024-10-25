@@ -179,42 +179,64 @@ return [
                 'collection-schema' => [
                     'fields' => [
                         [
-                            'name' => 'id',
-                            'type' => 'string',
+                            'name'  => 'id',
+                            'type'  => 'string',
                         ],
                         [
-                            'name' => 'slug',
-                            'type' => 'string',
+                            'name'  => 'slug',
+                            'type'  => 'string',
                         ],
                         [
-                            'name' => 'title',
-                            'type' => 'string',
+                            'name'  => 'title',
+                            'type'  => 'string',
                         ],
                         [
-                            'name' => 'description',
-                            'type' => 'description',
+                            'name'  => 'description',
+                            'type'  => 'string',
                         ],
                         [
-                            'name' => 'organisation',
-                            'type' => 'string',
+                            'name'  => 'organisation',
+                            'type'  => 'string',
                         ],
                         [
-                            'name' => 'category',
-                            'type' => 'string',
+                            'name'  => 'category',
+                            'type'  => 'string',
+                            'facet' => true,
                         ],
                         [
-                            'name' => 'tags',
-                            'type' => 'string[]'
+                            'name'  => 'tags',
+                            'type'  => 'string[]'
                         ],
                         [
-                            'name' => 'created_at',
-                            'type' => 'int64'
+                            'name'  => 'country',
+                            'type'  => 'string',
+                        ],
+                        [
+                            'name'  => 'state',
+                            'type'  => 'string',
+                        ],
+                        [
+                            'name'  => 'city',
+                            'type'  => 'string',
+                        ],
+                        [
+                            'name'  => 'address',
+                            'type'  => 'string',
+                        ],
+                        [
+                            'name'  => 'location',
+                            'type'  => 'string[]',
+                            'optional' => true, 
+                        ],
+                        [
+                            'name'  => 'created_at',
+                            'type'  => 'int64'
                         ],
                     ],
                     'default_sorting_field' => 'created_at'
                 ],
                 'search-parameters' => [
-                    'query_by' => 'name',
+                    'query_by' => 'slug,title,description',
                 ]
             ]
             // User::class => [

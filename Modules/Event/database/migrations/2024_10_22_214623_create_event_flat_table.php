@@ -25,7 +25,7 @@ return new class extends Migration
             $table->json('organisation')->nullable();
             $table->json('dates')->nullable();
             $table->json('pricings')->nullable();
-            $table->json('addresses')->nullable();
+            $table->json('address')->nullable();
             $table->json('tags')->nullable();
             $table->json('category')->nullable();
         });

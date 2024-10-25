@@ -38,11 +38,12 @@ class FlattenEvent implements ShouldQueue
             'description'      => $this->event->description,
             'banner'           => $this->event->banner,
             'max_participants' => $this->event->max_participants,
-            'organisation'     => $this->event->organisation->select(['id', 'slug', 'name']),
+            'organisation'     => $this->event->organisation->first(['slug', 'name']),
             'dates'            => $this->event?->eventDates->select(['id', 'start_date', 'end_date', 'duration', 'is_datetime']),
             'pricings'         => $this->event?->eventPricings->select(['id', 'name', 'description', 'quota', 'price']),
             'category'         => $this->event?->category?->first(['id', 'name']),
             'tags'             => $this->event->tags()->map(fn($tag) => $tag->name)->toArray(),
+            'address'          => $this->event->address->first(['id', 'country', 'state', 'postcode', 'city', 'address', 'latitude', 'longitude']), 
         ]);
     }
 }

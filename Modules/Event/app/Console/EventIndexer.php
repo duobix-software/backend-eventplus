@@ -2,7 +2,6 @@
 
 namespace Duobix\Event\Console;
 
-use Duobix\Event\Enums\EventStatus;
 use Duobix\Event\Jobs\FlattenEvent;
 use Duobix\Event\Models\Event;
 use Duobix\Event\Repositories\EventFlatRepository;
@@ -43,6 +42,7 @@ class EventIndexer extends Command
                 FlattenEvent::dispatchSync($event);
             }
         });
+        $this->warn('Events indexed.');
     }
 
     /**

@@ -29,6 +29,7 @@ class EventFlat extends Model
         'tags',
         'category',
         'organisation',
+        'address',
     ];
 
     protected $table = "event_flat";
@@ -44,6 +45,7 @@ class EventFlat extends Model
             'tags'         => 'array',
             'category'     => 'array',
             'organisation' => 'array',
+            'address'      => 'array',
         ];
     }
 

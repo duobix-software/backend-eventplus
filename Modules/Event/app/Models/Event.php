@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Laravel\Scout\Searchable;
 // use Duobix\Event\Database\Factories\EventFactory;
 
@@ -48,12 +48,20 @@ class Event extends Model
      *
      * @var array
      */
-    protected $with = ['eventDates', 'eventPricings', 'addresses'];
+    protected $with = ['eventDates', 'eventPricings', 'address'];
 
     // protected static function newFactory(): EventFactory
     // {
     //     // return EventFactory::new();
     // }
+
+    /**
+     * Determine if the model should be searchable.
+     */
+    public function shouldBeSearchable(): bool
+    {
+        return $this->status === EventStatus::Active;
+    }
 
     /**
      * Get the indexable data array for the model.
@@ -62,21 +70,23 @@ class Event extends Model
      */
     public function toSearchableArray()
     {
-        // $organisation = $this->organisation;
-        // $category = $organisation->category;
-        // $tags = $category->tags;
-
         $flat = $this->flat;
 
-        return array_merge($this->toArray(), [
-            'id'          => (string) $this->id,
-            'slug'        => $this->slug,
-            'title'       => $this->title,
-            'description' => $this->description,
-            'category'    => $flat->category['name'],
-            'tags'        => $flat->tags,
-            'created_at'  => $this->created_at->timestamp,
-        ]);
+        return [
+            'id'           => (string) $this->id,
+            'slug'         => $this->slug,
+            'title'        => $this->title,
+            'description'  => $this->description,
+            'organisation' => $flat->organisation['name'],
+            'country'      => $flat->address['country'],
+            'state'        => $flat->address['state'],
+            'city'         => $flat->address['city'],
+            'address'      => $flat->address['address'],
+            'location'     => isset($flat->address['latitude'], $flat->address['longitude']) ? [$flat->address['latitude'], $flat->address['longitude']] : null,
+            'category'     => $flat->category['name'],
+            'tags'         => $flat->tags,
+            'created_at'   => $this->created_at->timestamp,
+        ];
     }
 
     public function organisation(): BelongsTo
@@ -109,8 +119,8 @@ class Event extends Model
         return $this->hasMany(EventPricing::class);
     }
 
-    public function addresses(): MorphMany
+    public function address(): MorphOne
     {
-        return $this->morphMany(Address::class, 'addressable');
+        return $this->morphOne(Address::class, 'addressable');
     }
 }
