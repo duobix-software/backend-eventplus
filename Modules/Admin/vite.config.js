@@ -1,9 +1,10 @@
 import { defineConfig, loadEnv } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from "@vitejs/plugin-react"
+import { resolve } from 'path';
 
 export default defineConfig(({ mode }) => {
-    const envDir = "../../../";
+    const envDir = "../../";
 
     Object.assign(process.env, loadEnv(mode, envDir));
 
@@ -16,12 +17,12 @@ export default defineConfig(({ mode }) => {
         plugins: [
             react(),
             laravel({
-                hotFile: "../../public/admin-default-vite.hot",
-                publicDirectory: '../../public',
+                hotFile: resolve(__dirname, "../../public/admin-default-vite.hot"),
+                publicDirectory: resolve(__dirname, '../../public'),
                 buildDirectory: 'build/admin',
                 input: [
-                    __dirname + '/resources/assets/js/app.tsx',
-                    __dirname + '/resources/assets/css/app.css'
+                    __dirname + '/resources/js/app.tsx',
+                    __dirname + '/resources/css/app.css'
                 ],
                 refresh: true,
             }),
@@ -29,8 +30,3 @@ export default defineConfig(({ mode }) => {
     }
 
 });
-
-export const paths = [
-   'Modules/Admin/resources/assets/css/app.css',
-   'Modules/Admin/resources/assets/js/app.tsx',
-];
