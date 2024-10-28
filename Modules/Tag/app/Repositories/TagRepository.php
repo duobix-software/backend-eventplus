@@ -10,5 +10,10 @@ class TagRepository extends Repository
     {
         return \Duobix\Tag\Models\Tag::class;
     }
+
+    public function getAll()
+    {
+        return $this->model->query()->cursorPaginate();
+    }
 }
 

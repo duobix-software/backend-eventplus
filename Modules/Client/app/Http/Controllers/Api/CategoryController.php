@@ -13,13 +13,13 @@ class CategoryController extends Controller
         protected CategoryRepository $categoryRepository
     ) {}
 
-    public function categories()
+    public function index()
     {
-        return CategoryResource::collection($this->categoryRepository->all());
+        return CategoryResource::collection($this->categoryRepository->getAll());
     }
 
-    public function tags($category)
+    public function show(Request $request)
     {
-        return new CategoryResource($this->categoryRepository->with('tags')->findByField('slug', $category)->first());
+        return new CategoryResource($this->categoryRepository->findByField('slug', $request->route('category'))->first());
     }
 }
