@@ -13,6 +13,5 @@
     "Event": true,
     "Ticket": true,
     "Tag": true,
-    "ChargilyPay": true,
     "Sales": true
 }
