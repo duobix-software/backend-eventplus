@@ -13,11 +13,9 @@ Route::resource('categories', CategoryController::class)->only('index', 'show')-
 Route::resource('categories.tags', CategoryTagsController::class)->only('index')->names('category.tag');
 Route::resource('tags.categories', TagCategoriesController::class)->only('index')->only('index')->names('tag.category');
 
-Route::get('/categories', [CategoryController::class, 'categories'])->name('category');
-Route::get('/categories/{category}/tags', [CategoryController::class, 'tags'])->name('category.tags');
+Route::resource('organisations', OrganisationController::class)->names('organisation');
 
-Route::get('/organisations', [OrganisationController::class, 'index'])->name('organisation.index');
-Route::get('/organisations/{organisation}', [OrganisationController::class, 'show'])->name('organisation.show');
+// Route::get('/organisations', [OrganisationController::class, 'index'])->name('organisation.index');
+// Route::get('/organisations/{organisation}', [OrganisationController::class, 'show'])->name('organisation.show');
 
-Route::get('/events', [EventController::class, 'index'])->name('event.index');
-Route::get('/events/{event}', [EventController::class, 'show'])->name('event.show');
+Route::resource('events', EventController::class)->only('index', 'show')->names('event');

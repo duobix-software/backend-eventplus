@@ -8,19 +8,13 @@ use App\Http\Controllers\Controller;
 use Duobix\Event\Repositories\EventRepository;
 use Duobix\Sales\Enums\OrderStatus;
 use Duobix\Sales\Repositories\OrderRepository;
-use Illuminate\Routing\Controllers\HasMiddleware;
 
-class CheckoutController extends Controller implements HasMiddleware
+class CheckoutController extends Controller
 {
     public function __construct(
         protected EventRepository $eventRepository,
         protected OrderRepository $orderRepository,
     ) {}
-
-    public static function middleware()
-    {
-        return ['auth:sanctum'];
-    }
 
     public function __invoke(Request $request)
     {
@@ -63,13 +57,3 @@ class CheckoutController extends Controller implements HasMiddleware
         ], 201);
     }
 }
-
-
-/**
- * customer
- * event - pricing - date
- * 
- * 
- * 
- * 
- */

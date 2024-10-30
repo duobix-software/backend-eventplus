@@ -2,12 +2,12 @@
 
 namespace Duobix\Client\Http\Controllers\Api\Auth;
 
-use App\Http\Controllers\Controller;
-use Duobix\Core\Rules\PhoneNumber;
+use Illuminate\Http\Request;
 use Duobix\Core\Rules\WordCount;
+use Duobix\Core\Rules\PhoneNumber;
+use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rules\Password;
 use Duobix\Customer\Repositories\CustomerRepository;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {

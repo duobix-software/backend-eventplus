@@ -11,5 +11,7 @@ Route::prefix('chargilypay')->controller(ChargilyPayController::class)->as('char
     Route::get('/back', 'back')->name('back');
     Route::get('/back/success', 'success')->name('success');
     Route::get('/back/failure', 'failure')->name('failure');
-    Route::post('/webhook', 'webhook')->name('webhook');
+    Route::withoutMiddleware(['auth:sanctum', \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class])
+        ->post('/webhook', 'webhook')
+        ->name('webhook');
 });

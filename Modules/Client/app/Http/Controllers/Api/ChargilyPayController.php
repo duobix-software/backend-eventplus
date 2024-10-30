@@ -19,7 +19,6 @@ class ChargilyPayController extends Controller implements HasMiddleware
         ];
     }
 
-
     public function __construct(
         protected ChargilyPayRepository $chargilyPayRepository,
         protected OrderRepository $orderRepository,
@@ -71,8 +70,17 @@ class ChargilyPayController extends Controller implements HasMiddleware
         dd($checkout, $payment);
     }
 
-    public function webhook() {}
+    public function success()
+    {
+        
+    }
 
+    public function failure()
+    {
+        
+    }
+
+    public function webhook() {}
 
     /**
      * Just a shortcut

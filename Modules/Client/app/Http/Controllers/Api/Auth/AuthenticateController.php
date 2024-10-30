@@ -4,7 +4,6 @@ namespace Duobix\Client\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
@@ -36,12 +35,12 @@ class AuthenticateController extends Controller
 
         return response()->json([
             'token' =>  $customer->createToken($request->input('device_name'))->plainTextToken
-        ], 201);
+        ], 200);
     }
 
     public function destroy(Request $request)
     {
-        $request->user('customer')->tokens()->delete();
+        $request->user()->tokens->each->delete();
 
         return response()->noContent();
     }
