@@ -30,9 +30,9 @@ class WordCount implements ValidationRule
 
         // Check if the word count is within the specified range
         if ($wordCount < $this->min) {
-            $fail('core::validation.min-words')->translate();
+            $fail('core::validation.min-words')->translate(['min' => $this->min]);
         } elseif ($wordCount > $this->max) {
-            $fail('core::validation.max-words')->translate();
+            $fail('core::validation.max-words')->translate(['max' => $this->max]);
         }
     }
 }
