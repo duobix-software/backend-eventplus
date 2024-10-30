@@ -31,9 +31,19 @@ class Customer extends Model
         'is_organizer',
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-    
-
+    protected function casts()
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 
     // protected static function newFactory(): CustomerFactory
     // {
