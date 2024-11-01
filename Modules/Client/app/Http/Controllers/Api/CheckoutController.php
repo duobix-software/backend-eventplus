@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Duobix\Event\Repositories\EventRepository;
+use Duobix\Payment\Facades\Payment;
 use Duobix\Sales\Enums\OrderStatus;
 use Duobix\Sales\Repositories\OrderRepository;
 
@@ -24,10 +25,11 @@ class CheckoutController extends Controller
             'date' => ['nullable'],
         ]);
 
+        /** @var \Duobix\Customer\Models\Customer */
         $customer = $request->user();
 
         /** @var \Duobix\Event\Models\Event */
-        $event = $this->eventRepository->findByField('slug', $request->input('event'))->first();
+        $event = $this->eventRepository->findByFieldOrFail('slug', $request->input('event'))->first();
 
         $pricing = $event->eventPricings->first();
         if ($request->input('pricing')) {
@@ -39,8 +41,8 @@ class CheckoutController extends Controller
             $date = $event->eventDates->where('id', $request->input('date'));
         }
 
-        $order = DB::transaction(function () use ($event, $customer, $pricing, $date) {
-            return $this->orderRepository->create([
+        $url = DB::transaction(function () use ($request, $event, $customer, $pricing, $date) {
+            $order = $this->orderRepository->create([
                 'organisation_id' => $event->organisation_id,
                 'event_id' => $event->id,
                 'customer_id' => $customer->id,
@@ -49,11 +51,21 @@ class CheckoutController extends Controller
                 'total' => $pricing->price,
                 'status' => OrderStatus::Pending
             ]);
+
+            $payment = $customer->payments()->create([
+                'status' => 'pending',
+                'currency' => 'dzd',
+                'amount' => $order->total,
+                'locale' => 'en',
+                'type' => 'chargilypay',
+            ]);
+
+            return Payment::getRedirectUrl($payment);
         });
 
         return response()->json([
             'redirect' => true,
-            'redirect_url' => route('api.chargilypay.redirect', ['order' => $order->id]),
+            'redirect_url' => $url,
         ], 201);
     }
 }
