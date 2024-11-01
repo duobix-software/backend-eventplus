@@ -43,8 +43,8 @@ class Payment
      */
     public function getRedirectUrl($payment)
     {
-        $payment = app(config("payment.methods.{$payment->type}.class"));
+        $paymentClass = app(config("payment.methods.{$payment->type}.class"));
 
-        return $payment->getRedirectUrl($payment);
+        return $paymentClass->getRedirectUrl($payment);
     }
 }

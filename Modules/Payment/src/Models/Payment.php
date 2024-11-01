@@ -14,7 +14,7 @@ class Payment extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['status', 'currency', 'amount', 'type'];
+    protected $fillable = ['status', 'currency', 'amount', 'locale', 'type'];
 
     /**
      * Generate a new UUID for the model.

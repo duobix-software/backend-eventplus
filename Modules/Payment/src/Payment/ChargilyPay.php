@@ -10,7 +10,8 @@ class ChargilyPay extends Payment
         protected ChargilyPayClass $chargilyPayInstance
     ) {}
 
-    public function getRedirectUrl($payment) {
+    public function getRedirectUrl($payment)
+    {
         $checkout = $this->chargilyPayInstance->checkouts()->create([
             'metadata' => [
                 'payment_id' => $payment->uuid,
