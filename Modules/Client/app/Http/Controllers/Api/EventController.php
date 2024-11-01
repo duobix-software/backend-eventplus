@@ -22,9 +22,7 @@ class EventController extends Controller
 
     public function show(Request $request)
     {
-        $event = $this->eventRepository->findByField('slug', $request->route('event'))->first();
-
-        if (!$event) abort(404);
+        $event = $this->eventRepository->findByFieldOrFail('slug', $request->route('event'))->first();
 
         return new EventResource($event);
     }
