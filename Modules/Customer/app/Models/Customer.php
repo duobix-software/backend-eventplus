@@ -2,16 +2,17 @@
 
 namespace Duobix\Customer\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Duobix\Payment\Traits\HasPayments;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 // use Duobix\Customer\Database\Factories\CustomerFactory;
 
 class Customer extends Model
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasPayments;
 
     /**
      * The attributes that are mass assignable.
