@@ -2,6 +2,9 @@
 
 namespace Duobix\Payment\Providers;
 
+use Duobix\Payment\Payment;
+use Duobix\Payment\Facades\Payment as PaymentFacade;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 
@@ -30,6 +33,13 @@ class PaymentServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $loader = AliasLoader::getInstance();
+        $loader->alias('payment', PaymentFacade::class);
+
+        $this->app->singleton('payment', function () {
+            return new Payment;
+        }); 
+
         $this->app->register(EventServiceProvider::class);
     }
 
@@ -83,17 +93,5 @@ class PaymentServiceProvider extends ServiceProvider
     public function provides(): array
     {
         return [];
-    }
-
-    private function getPublishableViewPaths(): array
-    {
-        $paths = [];
-        foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->nameLower)) {
-                $paths[] = $path.'/modules/'.$this->nameLower;
-            }
-        }
-
-        return $paths;
     }
 }
