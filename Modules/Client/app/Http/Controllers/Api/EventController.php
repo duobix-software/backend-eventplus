@@ -24,6 +24,8 @@ class EventController extends Controller
     {
         $event = $this->eventRepository->findByField('slug', $request->route('event'))->first();
 
+        if (!$event) abort(404);
+
         return new EventResource($event);
     }
 }
