@@ -14,7 +14,7 @@ class CategoryRepository extends Repository
 
     public function getAll(array $params = [])
     {
-        return $this->model->query()->cursorPaginate($params['limit'] ?? 15);
+        return $this->simplePaginate($params['limit'] ?? 15);
     }
 
     public function getTags($categoryId)
