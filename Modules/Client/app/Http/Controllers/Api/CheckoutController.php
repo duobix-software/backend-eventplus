@@ -53,6 +53,7 @@ class CheckoutController extends Controller
             ]);
 
             $payment = $customer->payments()->create([
+                'order_id' => $order->id,
                 'status' => 'pending',
                 'currency' => 'dzd',
                 'amount' => $order->total,
