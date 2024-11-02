@@ -16,9 +16,4 @@ class CategoryRepository extends Repository
     {
         return $this->simplePaginate($params['limit'] ?? 15);
     }
-
-    public function getTags($categoryId)
-    {
-        // return $this->find()        
-    }
 }

@@ -37,6 +37,7 @@ class EventResource extends JsonResource
             'date' => $this->whenLoaded('eventDates', $dateFn),
             'dates' => EventDatesResource::collection($this->whenLoaded('eventDates')),
             'pricings' => EventPricingsResource::collection($this->whenLoaded('eventPricings')),
+            'address' => new AddressResource($this->whenLoaded('address')),
             'created_at' => $this->created_at,
             'checkout_base_url' => route('api.checkout', ['event' => $this->slug]),
         ];
