@@ -5,6 +5,8 @@ namespace Duobix\Sales\Models;
 use Duobix\Sales\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 // use Duobix\Sales\Database\Factories\OrderFactory;
 
 class Order extends Model
@@ -36,6 +38,11 @@ class Order extends Model
         return [
             'status' => OrderStatus::class
         ];
+    }
+
+    public function payment(): HasMany
+    {
+        return $this->hasMany(\Duobix\Payment\Models\Payment::class);
     }
 
     // protected static function newFactory(): OrderFactory

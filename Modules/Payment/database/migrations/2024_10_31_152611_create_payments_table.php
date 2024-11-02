@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->morphs('payable');
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->string('currency');
             $table->decimal('amount', 10, 2);
