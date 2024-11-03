@@ -13,7 +13,7 @@ class EventDatesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => (string) $this->id,
             'start_date' => $this->is_datetime ? $this->start_date : $this->start_date->format('Y-m-d') ,
             'end_date' => $this->is_datetime ? $this->end_date : $this->end_date->format('Y-m-d') ,
             'duration' => $this->duration,

@@ -13,7 +13,7 @@ class TagResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
+            'id' => (string) $this->id,
             'name' => $this->name,
             'tag_url' => route('api.tag.show', ['tag' => $this->id]),
             'categories_url' => route('api.tag.category.index', ['tag' => $this->id]),
