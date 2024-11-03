@@ -10,6 +10,14 @@ return   [
         'is_datetime' => false,
     ],
     [
+        'id' => 46,
+        'event_id' => 1,
+        'start_date' => '2024-12-19',
+        'end_date' => '2024-12-22',
+        'duration' => '4 days',
+        'is_datetime' => false,
+    ],
+    [
         'id' => 2,
         'event_id' => 2,
         'start_date' => '2025-01-05',

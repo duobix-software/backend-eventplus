@@ -4,8 +4,14 @@ return  [
     [
         'id' => 1,
         'event_id' => 1, 
-        'quota' => 50000,
+        'quota' => 40000,
         'price' => 299.99,
+    ],
+    [
+        'id' => 46,
+        'event_id' => 1,
+        'quota' => 10000,
+        'price' => 499.99,
     ],
     [
         'id' => 2,
@@ -216,5 +222,5 @@ return  [
         'event_id' => 45, 
         'quota' => 30000,
         'price' => 20.00,
-    ],
+    ]
 ];
