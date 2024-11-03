@@ -4,7 +4,7 @@ namespace Duobix\Installer\Database\Seeders\Customer;
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeders extends Seeder
+class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

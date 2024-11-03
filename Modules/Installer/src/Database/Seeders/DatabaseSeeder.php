@@ -8,6 +8,7 @@ use Duobix\Installer\Database\Seeders\Category\DatabaseSeeder as CategorySeeder;
 use Duobix\Installer\Database\Seeders\Organisation\DatabaseSeeder as OrganisationSeeder;
 use Duobix\Installer\Database\Seeders\Tag\DatabaseSeeder as TagSeeder;
 use Duobix\Installer\Database\Seeders\Event\DatabaseSeeder as EventSeeder;
+use Duobix\Installer\Database\Seeders\Customer\DatabaseSeeder as CustomerSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(OrganisationSeeder::class);
         $this->call(EventSeeder::class);
+        $this->call(CustomerSeeder::class);
     }
 }

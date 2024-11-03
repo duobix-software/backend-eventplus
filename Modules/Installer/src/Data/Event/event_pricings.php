@@ -4,12 +4,14 @@ return  [
     [
         'id' => 1,
         'event_id' => 1, 
+        'name' => 'simple',
         'quota' => 40000,
         'price' => 299.99,
     ],
     [
         'id' => 46,
         'event_id' => 1,
+        'name' => 'VIP',
         'quota' => 10000,
         'price' => 499.99,
     ],

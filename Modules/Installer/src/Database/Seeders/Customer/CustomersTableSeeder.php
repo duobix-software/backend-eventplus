@@ -12,5 +12,11 @@ class CustomersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('customers')->insert([
+            'fullname' => 'example user',
+            'phone' => '0770801128',
+            'username' => 'user',
+            'password' => bcrypt('password'),
+        ]);
     }
 }
