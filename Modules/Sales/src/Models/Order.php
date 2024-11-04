@@ -2,9 +2,11 @@
 
 namespace Duobix\Sales\Models;
 
+use Duobix\Customer\Models\Customer;
 use Duobix\Sales\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // use Duobix\Sales\Database\Factories\OrderFactory;
@@ -43,6 +45,11 @@ class Order extends Model
     public function payment(): HasMany
     {
         return $this->hasMany(\Duobix\Payment\Models\Payment::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     // protected static function newFactory(): OrderFactory

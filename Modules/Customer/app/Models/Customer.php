@@ -4,6 +4,7 @@ namespace Duobix\Customer\Models;
 
 use Laravel\Sanctum\HasApiTokens;
 use Duobix\Payment\Traits\HasPayments;
+use Duobix\Sales\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,8 +47,9 @@ class Customer extends Model
         ];
     }
 
-    // protected static function newFactory(): CustomerFactory
-    // {
-    //     // return CustomerFactory::new();
-    // }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
