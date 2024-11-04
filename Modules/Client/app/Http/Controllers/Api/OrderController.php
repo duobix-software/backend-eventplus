@@ -19,7 +19,7 @@ class OrderController extends Controller
     }
 
     public function index() {
-        $orders = $this->customer->orders()->get();
+        $orders = $this->customer->orders()->latest()->simplePaginate();
 
         return OrderResource::collection($orders);
     }
