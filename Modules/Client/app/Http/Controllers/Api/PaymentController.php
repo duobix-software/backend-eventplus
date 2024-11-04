@@ -6,20 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Chargily\ChargilyPay\ChargilyPay;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Routing\Controllers\HasMiddleware;
 use Duobix\Payment\Repositories\PaymentRepository;
 use Duobix\Sales\Enums\OrderStatus;
 
 class PaymentController extends Controller
 {
-    // public static function middleware()
-    // {
-    //     return [
-    //         // new Middleware('auth:sanctum', ['success', 'failure'])
-    //     ];
-    // }
-
     public function __construct(
         protected ChargilyPay $chargilyPay,
         protected PaymentRepository $paymentRepository,
