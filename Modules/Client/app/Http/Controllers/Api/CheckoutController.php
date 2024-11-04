@@ -33,12 +33,12 @@ class CheckoutController extends Controller
 
         $pricing = $event->eventPricings->first();
         if ($request->input('pricing')) {
-            $pricing = $event->eventPricings->where('id', $request->input('pricing'));
+            $pricing = $event->eventPricings->where('id', $request->input('pricing'))->first();
         }
 
         $date = $event->eventDates->first();
         if ($request->input('date')) {
-            $date = $event->eventDates->where('id', $request->input('date'));
+            $date = $event->eventDates->where('id', $request->input('date'))->first();
         }
 
         $url = DB::transaction(function () use ($request, $event, $customer, $pricing, $date) {
