@@ -5,22 +5,26 @@ namespace Duobix\Client\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Duobix\Client\Transformers\OrderResource;
 use Duobix\Customer\Models\Customer;
-use Duobix\Sales\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     protected Customer $customer;
 
-    public function __construct(
-        protected OrderRepository $orderRepository
-    ) {
+    public function __construct()
+    {
         $this->customer = request()->user();
     }
 
-    public function index() {
-        $orders = $this->customer->orders()->latest()->simplePaginate();
+    public function index(Request $request)
+    {
+        $baseQuery = $this->customer->orders();
 
+        if ($request->input('status')) {
+            $baseQuery->where('status', $request->input('status'));
+        }
+
+        $orders = $baseQuery->latest()->simplePaginate();
         return OrderResource::collection($orders);
     }
 
