@@ -2,10 +2,10 @@
 
 namespace Duobix\Client\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Duobix\Category\Repositories\CategoryRepository;
-use Duobix\Client\Transformers\CategoryResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Duobix\Client\Transformers\CategoryResource;
+use Duobix\Category\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
@@ -13,9 +13,13 @@ class CategoryController extends Controller
         protected CategoryRepository $categoryRepository
     ) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        return CategoryResource::collection($this->categoryRepository->getAll());
+        $request->validate([
+            'with-tags' => ['nullable', 'boolean'],
+        ]);
+
+        return CategoryResource::collection($this->categoryRepository->getAll($request->all()));
     }
 
     public function show(Request $request)
