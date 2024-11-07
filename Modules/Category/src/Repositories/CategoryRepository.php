@@ -14,6 +14,12 @@ class CategoryRepository extends Repository
 
     public function getAll(array $params = [])
     {
-        return $this->simplePaginate($params['limit'] ?? 15);
+        $query = $this->model->query();
+
+        if (data_get($params, 'with-tags')) {
+            $query = $this->with('tags');
+        }
+
+        return $query->simplePaginate($params['limit'] ?? 15);
     }
 }
