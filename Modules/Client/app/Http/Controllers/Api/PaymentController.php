@@ -33,11 +33,7 @@ class PaymentController extends Controller
                 'status' => 'paid',
             ]);
 
-            $payment->order->update([
-                'status' => OrderStatus::Confirmed,
-            ]);
-
-            // here we dispatch events.
+            event(new \Duobix\Client\Events\Order\OrderConfirmed($payment->order_id));
         });
 
         redirect()->away('eventplus://checkout/success');
@@ -60,11 +56,7 @@ class PaymentController extends Controller
                 'status' => 'failed',
             ]);
 
-            $payment->order->update([
-                'status' => OrderStatus::Failed,
-            ]);
-
-            // here we dispatch events.
+            event(new \Duobix\Client\Events\Order\OrderFailed($payment->order_id));
         });
 
         redirect()->away('eventplus://checkout/failure');

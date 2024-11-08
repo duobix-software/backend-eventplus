@@ -3,6 +3,7 @@
 namespace Duobix\Sales\Models;
 
 use Duobix\Customer\Models\Customer;
+use Duobix\Event\Models\EventVariant;
 use Duobix\Sales\Enums\OrderStatus;
 use Duobix\Ticket\Models\Ticket;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,11 @@ class Order extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function eventVariant()
+    {
+        return $this->belongsTo(EventVariant::class);
     }
 
     // protected static function newFactory(): OrderFactory

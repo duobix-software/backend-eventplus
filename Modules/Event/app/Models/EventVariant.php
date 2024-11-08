@@ -24,6 +24,8 @@ class EventVariant extends Model
         'remaining_qte',
     ];
 
+    public $timestamps = false;
+
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
