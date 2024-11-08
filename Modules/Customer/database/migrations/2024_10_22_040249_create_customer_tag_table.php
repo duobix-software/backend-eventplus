@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('customer_tag', function (Blueprint $table) {
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+
+            $table->primary(['customer_id', 'tag_id']);
         });
     }
 
