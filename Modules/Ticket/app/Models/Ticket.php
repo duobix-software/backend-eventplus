@@ -32,14 +32,14 @@ class Ticket extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public static function createTicket(array $attributes)
+    public static function createTicket(string $orderId)
     {
-        $instance = new static($attributes);
+        $instance = new static();
 
         $token = $instance->generateToken();
 
         $ticket = parent::query()->create([
-            'order_id'  => $attributes['order_id'],
+            'order_id'  => $orderId,
             'token' => $token->secret,
         ]);
 

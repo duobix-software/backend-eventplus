@@ -23,6 +23,6 @@ class TicketRepository extends Repository
             return \Duobix\Ticket\Models\Ticket::refreshTicket($attributes);
         }
 
-        return \Duobix\Ticket\Models\Ticket::createTicket($order->ticket);
+        return \Duobix\Ticket\Models\Ticket::createTicket($order->id);
     }
 }
