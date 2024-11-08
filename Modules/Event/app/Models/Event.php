@@ -123,4 +123,9 @@ class Event extends Model
     {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    public function eventVariants(): HasMany
+    {
+        return $this->hasMany(EventVariant::class);
+    }
 }

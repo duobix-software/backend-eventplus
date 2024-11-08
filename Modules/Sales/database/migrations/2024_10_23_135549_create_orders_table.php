@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('organisation_id')->nullable()->constrained()->nullOnDelete();            
+            $table->foreignId('organisation_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('event_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('event_date_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('event_pricing_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('event_variant_id')->nullable()->constrained()->nullOnDelete();
             $table->decimal('total');
             $table->string('status');
+            $table->string('variant_name')->nullable();
             $table->string('customer_first_name')->nullable();
             $table->string('customer_last_name')->nullable();
             $table->string('customer_phone')->nullable();

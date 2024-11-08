@@ -4,6 +4,7 @@ namespace Duobix\Sales\Models;
 
 use Duobix\Customer\Models\Customer;
 use Duobix\Sales\Enums\OrderStatus;
+use Duobix\Ticket\Models\Ticket;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,7 @@ class Order extends Model
         'event_id',
         'event_date_id',
         'event_pricing_id',
+        'event_variant_id',
         'total',
         'status',
         'customer_first_name',
@@ -40,6 +42,11 @@ class Order extends Model
         return [
             'status' => OrderStatus::class
         ];
+    }
+
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class);
     }
 
     public function payment(): HasMany

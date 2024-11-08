@@ -4,15 +4,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Duobix\Client\Http\Controllers\Api\TagController;
 use Duobix\Client\Http\Controllers\Api\EventController;
+use Duobix\Client\Http\Controllers\Api\OrderController;
+use Duobix\Client\Http\Controllers\Api\TicketController;
 use Duobix\Client\Http\Controllers\Api\PaymentController;
 use Duobix\Client\Http\Controllers\Api\CategoryController;
 use Duobix\Client\Http\Controllers\Api\CheckoutController;
 use Duobix\Client\Http\Controllers\Api\CategoryTagsController;
 use Duobix\Client\Http\Controllers\Api\OrganisationController;
-use Duobix\Client\Http\Controllers\Api\TagCategoriesController;
 use Duobix\Client\Http\Controllers\Api\Auth\RegisterController;
+use Duobix\Client\Http\Controllers\Api\TagCategoriesController;
 use Duobix\Client\Http\Controllers\Api\Auth\AuthenticateController;
-use Duobix\Client\Http\Controllers\Api\OrderController;
 
 Route::prefix('v1')->group(function () {
 
@@ -41,7 +42,10 @@ Route::prefix('v1')->group(function () {
 
         Route::post('checkout', CheckoutController::class)->name('checkout');
 
+        // Route::post('orders/{order}/continue', [OrderController::class, "continue"])->name('order.continue');
         Route::resource('orders', OrderController::class)->only('index', 'show')->names('order');
+        
+        Route::get('/orders/{order}/events/{event}/ticket', TicketController::class)->name('order.ticket');
     });
 
     Route::prefix('payment')->controller(PaymentController::class)->as('payment.')->group(function () {

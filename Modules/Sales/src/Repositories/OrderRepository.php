@@ -10,4 +10,6 @@ class OrderRepository extends Repository
     {
         return \Duobix\Sales\Models\Order::class;
     }
+
+    
 }

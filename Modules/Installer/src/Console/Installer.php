@@ -41,6 +41,9 @@ class Installer extends Command
         $this->warn('Step: Seeding basic data for E-ticket kickstart...');
         $this->info(app(ETicketDatabaseSeeder::class)->run([]));
 
+        $this->warn('Step: Generating variants');
+        $this->call('eventplus:variant');
+
         $this->warn('Step: Indexing events...');
         $this->call('indexer:index');
 

@@ -5,6 +5,7 @@ namespace Duobix\Client\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Duobix\Event\Repositories\EventFlatRepository;
 use Duobix\Event\Repositories\EventRepository;
 use Duobix\Payment\Facades\Payment;
 use Duobix\Sales\Enums\OrderStatus;
@@ -14,6 +15,7 @@ class CheckoutController extends Controller
 {
     public function __construct(
         protected EventRepository $eventRepository,
+        protected EventFlatRepository $eventFlatRepository,
         protected OrderRepository $orderRepository,
     ) {}
 
@@ -23,6 +25,7 @@ class CheckoutController extends Controller
             'event' => ['required', 'string'],
             'pricing' => ['nullable'],
             'date' => ['nullable'],
+            'variant_id' => ['nullable'],
         ]);
 
         /** @var \Duobix\Customer\Models\Customer */
@@ -41,15 +44,24 @@ class CheckoutController extends Controller
             $date = $event->eventDates->where('id', $request->input('date'))->first();
         }
 
-        $url = DB::transaction(function () use ($request, $event, $customer, $pricing, $date) {
+        $variant = $event->eventVariants()
+            ->where('event_id', $event->id)
+            ->where('event_date_id', $date->id)
+            ->where('event_pricing_id', $pricing->id)
+            ->firstOrFail();
+
+        $url = DB::transaction(function () use ($request, $event, $customer, $pricing, $date, $variant) {
             $order = $this->orderRepository->create([
+                'customer_id' => $customer->id,
                 'organisation_id' => $event->organisation_id,
                 'event_id' => $event->id,
-                'customer_id' => $customer->id,
-                'event_pricing_id' => $pricing->id,
                 'event_date_id' => $date->id,
+                'event_pricing_id' => $pricing->id,
+                'event_variant_id' => $variant->id,
                 'total' => $pricing->price,
-                'status' => OrderStatus::Pending
+                'status' => OrderStatus::Pending,
+                'variant_name' => $variant->name,
+                'event_title' => $event->title,
             ]);
 
             $payment = $customer->payments()->create([

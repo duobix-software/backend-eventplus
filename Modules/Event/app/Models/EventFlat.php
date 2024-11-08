@@ -50,7 +50,7 @@ class EventFlat extends Model
     }
 
     // protected static function newFactory(): EventFlatFactory
-    // {
+    // 
     //     // return EventFlatFactory::new();
     // }
 }
