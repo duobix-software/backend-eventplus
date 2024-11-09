@@ -70,4 +70,23 @@ class Ticket extends Model
             'public' => $plainTextToken,
         ];
     }
+
+    /**
+     * Find the token instance matching the given token.
+     *
+     * @param  string  $token
+     * @return static|null
+     */
+    public static function findTicket($token)
+    {
+        if (strpos($token, '|') === false) {
+            return static::where('token', hash('sha256', $token))->first();
+        }
+
+        [$id, $token] = explode('|', $token, 2);
+
+        if ($instance = static::find($id)) {
+            return hash_equals($instance->token, hash('sha256', $token)) ? $instance : null;
+        }
+    }
 }

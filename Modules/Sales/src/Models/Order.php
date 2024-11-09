@@ -30,6 +30,7 @@ class Order extends Model
         'event_variant_id',
         'total',
         'status',
+        'variant_name',
         'customer_first_name',
         'customer_last_name',
         'customer_phone',
