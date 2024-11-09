@@ -14,6 +14,7 @@ use Duobix\Client\Http\Controllers\Api\OrganisationController;
 use Duobix\Client\Http\Controllers\Api\Auth\RegisterController;
 use Duobix\Client\Http\Controllers\Api\TagCategoriesController;
 use Duobix\Client\Http\Controllers\Api\Auth\AuthenticateController;
+use Duobix\Client\Http\Controllers\Api\CustomerController;
 use Duobix\Client\Http\Controllers\CustomerTagController;
 
 Route::prefix('v1')->group(function () {
@@ -32,8 +33,8 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::get('/customer', fn(Request $request) => $request->user());
         Route::post('/customer/tags', [CustomerTagController::class, 'store'])->name('customer.tag.store');
+        Route::get('/customer', CustomerController::class);
 
         Route::resource('tags', TagController::class)->only('index', 'show')->names('tag');
         Route::resource('categories', CategoryController::class)->only('index', 'show')->names('category');

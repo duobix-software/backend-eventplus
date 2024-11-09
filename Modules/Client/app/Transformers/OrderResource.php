@@ -16,6 +16,7 @@ class OrderResource extends JsonResource
             'id' => (string) $this->id,
             'status' => $this->status,
             'created_at' => $this->created_at,
+            'event' => new EventResource($this->whenLoaded('event')),
         ];
     }
 }

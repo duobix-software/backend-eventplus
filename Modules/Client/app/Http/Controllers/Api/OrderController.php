@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $baseQuery = $this->customer->orders();
+        $baseQuery = $this->customer->orders()->with('event');
 
         if ($request->input('status')) {
             $baseQuery->where('status', $request->input('status'));
@@ -30,7 +30,7 @@ class OrderController extends Controller
 
     public function show(Request $request)
     {
-        $order = $this->customer->orders()->where('id', $request->route('order'))->firstOrFail();
+        $order = $this->customer->orders()->with('event')->where('id', $request->route('order'))->firstOrFail();
 
         return new OrderResource($order);
     }
