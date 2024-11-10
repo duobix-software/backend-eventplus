@@ -17,7 +17,7 @@ class TicketRepository extends Repository
      */
     public function createOrRefrsh($order)
     {
-        if (!is_a($order, $this->model())) {
+        if (!is_a($order, \Duobix\Sales\Models\Order::class)) {
             $order = app(OrderRepository::class)->findByFieldOrFail('id', $order)->first();
         }
 
