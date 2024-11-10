@@ -3,6 +3,7 @@
 namespace Duobix\Client\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Duobix\Customer\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerTagController extends Controller
@@ -13,7 +14,7 @@ class CustomerTagController extends Controller
             'tags' => ['required', 'array'],
         ]);
 
-        $request->user()->tags()->attach($request->input('tags'));
+        $request->user()->tags()->sync(array_unique($request->input('tags')));
 
         return response(status: 201);
     }
