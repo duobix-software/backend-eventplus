@@ -20,7 +20,8 @@ class CustomerResource extends JsonResource
             'dob' => $this->date_of_birth,
             'username' => $this->username,
             'email' => $this->email,
-            'is_organizer' => (bool) $this->is_organizer
+            'is_admin' => (bool) $this->isAdmin(),
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
     }
 }
