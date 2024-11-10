@@ -59,4 +59,9 @@ class Customer extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->is_organizer;
+    }
+
 }
