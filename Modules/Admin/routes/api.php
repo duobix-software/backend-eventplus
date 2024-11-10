@@ -18,6 +18,7 @@ Route::prefix('admin/v1')->as('admin.')->group(function () {
 
         return [
             'order' => $ticket->order->id,
+            'status' => 'placeholder',
             'variant' => new EventVariantResource($ticket->order->eventVariant),
             'customer' => new CustomerResource($ticket->order->customer),
         ];
