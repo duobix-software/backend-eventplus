@@ -24,6 +24,9 @@ class EventRepository extends Repository
                 case "organisation":
                     $query->whereHas('organisation', fn($query) => $query->where('slug', $value));
                     break;
+                case "tag":
+                    $query->whereHas('category.tags', fn($query) => $query->where('name', 'like', '%' . $value . '%'));
+                    break;
             }
         }
 
