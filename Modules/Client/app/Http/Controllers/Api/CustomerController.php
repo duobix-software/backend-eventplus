@@ -11,11 +11,7 @@ class CustomerController extends Controller
     public function __invoke(Request $request)
     {
         /** @var \Duobix\Customer\Models\Customer */
-        $customer = $request->user();
-
-        if ($request->input('with-tags')) {
-            $customer->load('tags');
-        }
+        $customer = $request->user()->load('tags');
 
         return new CustomerResource($customer);
     }
