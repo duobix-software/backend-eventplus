@@ -15,12 +15,14 @@ class TicketRepository extends Repository
     /** 
      * @return \Duobix\Ticket\NewAccessTicket
      */
-    public function createOrRefrsh(array $attributes)
+    public function createOrRefrsh($order)
     {
-        $order = app(OrderRepository::class)->findByFieldOrFail('id', $attributes['order_id'])->first();
+        if (!is_a($order, $this->model())) {
+            $order = app(OrderRepository::class)->findByFieldOrFail('id', $order)->first();
+        }
 
         if ($order->ticket) {
-            return \Duobix\Ticket\Models\Ticket::refreshTicket($attributes);
+            return \Duobix\Ticket\Models\Ticket::refreshTicket($order->ticket);
         }
 
         return \Duobix\Ticket\Models\Ticket::createTicket($order->id);

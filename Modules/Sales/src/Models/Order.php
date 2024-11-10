@@ -72,6 +72,11 @@ class Order extends Model
         return $this->belongsTo(Event::class);
     }
 
+    public function canIssueTicket(): bool
+    {
+        return $this->status === OrderStatus::Confirmed || $this->status === OrderStatus::CheckedIn || $this->status === OrderStatus::TicketIssued;
+    }
+
     // protected static function newFactory(): OrderFactory
     // {
     //     // return OrderFactory::new();

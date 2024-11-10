@@ -22,17 +22,16 @@ class TicketController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $event = $this->eventRepository->findByFieldOrFail('slug', $request->route('event'))->first();
+        /** @var \Duobix\Sales\Models\Order */
+        $order = $this->orderRepository->findByFieldOrFail('id', $request->route('order'))->first();        
 
-        // check if the check_in event is enabled.
-        if (false) {
-            return [
-                'token' => 'https://eventplus.duobix.com',
-            ];
-        }
+        if (!$order->canIssueTicket()) return abort(403);
 
-        $accessTicket = $this->ticketRepository->createOrRefrsh(['order_id' => $request->route('order')]);
+        $accessTicket = $this->ticketRepository->createOrRefrsh($order);
 
-        return $accessTicket;
+        return [
+            'token' => $accessTicket->publicToken,
+            'fallback_token' => 'xyz'
+        ];
     }
 }

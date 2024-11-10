@@ -47,8 +47,7 @@ Route::prefix('v1')->group(function () {
 
         // Route::post('orders/{order}/continue', [OrderController::class, "continue"])->name('order.continue');
         Route::resource('orders', OrderController::class)->only('index', 'show')->names('order');
-        
-        Route::get('/orders/{order}/events/{event}/ticket', TicketController::class)->name('order.ticket');
+        Route::get('/orders/{order}/ticket', TicketController::class)->name('order.ticket');
     });
 
     Route::prefix('payment')->controller(PaymentController::class)->as('payment.')->group(function () {
