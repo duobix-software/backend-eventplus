@@ -15,8 +15,11 @@ class OrderResource extends JsonResource
         return [
             'id' => (string) $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
             'event' => new EventResource($this->whenLoaded('event')),
+            $this->mergeWhen($request->routeIs('api.order.show'), fn() => [
+                'variant' => new EventVariantResource($this->eventVariant),
+            ]),
+            'created_at' => $this->created_at,
         ];
     }
 }
